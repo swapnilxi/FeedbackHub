@@ -86,5 +86,8 @@ public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory, MongoMappingCo
 ```
 You can then use Spring Data MongoDB to interact with your MongoDB database by defining document classes and repository interfaces.
 
-
+# Setting up database in codeSpace
+- for this we need Sql Server in codespace 
+## instruction
+- 
 
