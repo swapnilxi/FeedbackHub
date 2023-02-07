@@ -1,5 +1,7 @@
 # FeedbackHub
-A feedback web application for Developers and community
+A feedback web application for Developers and community  
+
+
 
 This project is to teach the audience who wants to learn Spring Boot or Java.
 I'll make an youtube video and a presentation for your reference.  
@@ -11,7 +13,7 @@ Presentation Link:
 2. MySQL(Sql)
 3. React (javaScript)
 
-# Project Setup
+## Project Setup
 To get Started we need to understand that we have to setup three things 
 1. Choosing and setting up IDE,VS code for Spring Boot, alternatively you can use Eclipse or STS [Start Here](https://spring.io/tools)
 - download Visual Studio Code (https://code.visualstudio.com/)
