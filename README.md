@@ -23,7 +23,7 @@ But it is temprorary Database, so choose one from above.
 
 
 
-Here's how you can connect a spring boot application with a MySQL database:
+# Here's how you can connect a spring boot application with a MySQL database:
 
 First, add the necessary dependencies to your project's pom.xml file:
 
