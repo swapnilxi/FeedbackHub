@@ -6,7 +6,7 @@ A feedback web application for Developers and community
 This project is to teach the audience who wants to learn Spring Boot or Java.
 I'll make an youtube video and a presentation for your reference.  
 Video Link: https://youtu.be/B_PCGl_kdng
-Presentation Link:[View on canva] (https://www.canva.com/design/DAFZubtuybI/fPlvL4OWE7iYOlop9wSreQ/view?utm_content=DAFZubtuybI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+Presentation Link: [View on canva] (https://www.canva.com/design/DAFZubtuybI/fPlvL4OWE7iYOlop9wSreQ/view?utm_content=DAFZubtuybI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 ## Technologies Used 
 1. Spring Boot (Java) 
 2. MySQL(Sql)
