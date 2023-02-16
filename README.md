@@ -56,7 +56,7 @@ public DataSource dataSource() {
 }
 ```
 You can then use JPA (Java Persistence API) to interact with your MySQL database by defining Entity classes and repository interfaces.
-Here's how you can connect a spring boot application with a MongoDB database:
+# Here's how you can connect a spring boot application with a MongoDB database:
 
 First, add the necessary dependencies to your project's pom.xml file:
 ```
