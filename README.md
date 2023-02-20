@@ -5,7 +5,7 @@ A feedback web application for Developers and community
 
 This project is to teach the audience who wants to learn Spring Boot or Java.
 I'll make an youtube video and a presentation for your reference.  
-Video Link:   
+Video Link:
 Presentation Link:
 
 ## Technologies Used 
