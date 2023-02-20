@@ -7,9 +7,12 @@ This project is to teach the audience who wants to learn Spring Boot or Java.
 I'll make an youtube video and a presentation for your reference.  
 Video Link: https://youtu.be/B_PCGl_kdng
 Presentation Link: [View on canva] (https://www.canva.com/design/DAFZubtuybI/fPlvL4OWE7iYOlop9wSreQ/view?utm_content=DAFZubtuybI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+
+google doc file:   (if you prefer to read doc instead md files)
+Help and Support: [Linkedin: https://bit.ly/swapnilLinkedin](https://bit.ly/swapnilLinkedin)
 ## Technologies Used 
 1. Spring Boot (Java) 
-2. MySQL(Sql)
+2. MySQL(Sql, google cloud), postgre sql
 3. React (javaScript)
 
 ## Project Setup
@@ -72,21 +75,50 @@ Copy code
 ```
 spring.data.mongodb.uri=mongodb://localhost:27017/database_name
 ```
-Create a MongoTemplate bean in your Spring Boot application configuration class:
-- java
-
-```
-@Bean
-public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory, MongoMappingContext context) {
-    MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory), context);
-    converter.setTypeMapper(new DefaultMongoTypeMapper(null));
-    return new MongoTemplate(mongoDbFactory, converter);
-}
-```
-You can then use Spring Data MongoDB to interact with your MongoDB database by defining document classes and repository interfaces.
 
 # Setting up database in codeSpace
-- for this we need Sql Server in codespace 
-## instruction
+- for this we can use google cloud database on cloud sql, for now I have used a website nHost, they give you instant postgre sql. 
+- go to nhost ( nHost.io )
+- go to settings after logging in 
+- you will get the database information to connect in database section
+[ss-img](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVHfGOoNtpFOHgbhpjjr9%2Fuploads%2FbybsLqgQED77JYiQZytM%2Fimage.png?alt=media&token=13a62fc7-b68b-47c5-8429-b9942188aa40)
+
+<p align="center">
+  <img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVHfGOoNtpFOHgbhpjjr9%2Fuploads%2FbybsLqgQED77JYiQZytM%2Fimage.png?alt=media&token=13a62fc7-b68b-47c5-8429-b9942188aa40" width="350" title="nhost database details">
+</p>
+
+Now configure you application.properties after adding dependencies
+ - postgres
+ - spring-boot-starter-data-jpa
+ - spring-boot-starter-web
+
+copy and paste
+```
+server.port=9090
+
+
+#db-configuration
+spring.datasource.url=jdbc:postgresql://iwjhgmymtrnujcokdtrv.db.eu-central-1.nhost.run:5432/iwjhgmymtrnujcokdtrv
+
+spring.datasource.username=postgres
+spring.datasource.password=Swapnilsql@12
+
+
+
+# spring data jpa 
+# postgres
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+#mysql, uncomment below if using mysql
+# spring.jpa.show-sql=true
+# spring.jpa.hibernate.ddl-auto=update
+# spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+```  
+
+## instructions 
 - 
 
