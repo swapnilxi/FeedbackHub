@@ -15,14 +15,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+        User user= this.DtoToUser(userDTO);
+        User savedUser= this.userRepository.save;
+        return this.userToDTO(savedUser);
     }
 
     @Override
     public UserDTO updateUdser(UserDTO user, Integer userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUdser'");
+       User user= this.userRepository.findById(userId).orElseThrow(e-> new ResourceNotFoundException("user", "id", userId))
     }
 
     @Override
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
 
-    private User DtoToUser(UserDTO userDTO){
+    public User DtoToUser(UserDTO userDTO){
         User user= new User();
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         return user;
 
     }
-    private UserDTO userDTO(User user){
+    public UserDTO userToDTO(User user){
         UserDTO userDTO= new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());
