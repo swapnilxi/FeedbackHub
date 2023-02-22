@@ -120,5 +120,8 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ```  
 
 ## instructions 
-- 
+- spring boot initaliser
+- add dependencies
+- add databases
+- create folder structure 
 
