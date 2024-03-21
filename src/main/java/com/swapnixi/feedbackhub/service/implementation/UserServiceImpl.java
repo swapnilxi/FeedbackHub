@@ -1,14 +1,17 @@
 package com.swapnixi.feedbackhub.service.implementation;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.swapnixi.feedbackhub.entity.UserDTO;
 import com.swapnixi.feedbackhub.entity.User;
-import com.swapnixi.feedbackhub.payloads.UserDTO;
 import com.swapnixi.feedbackhub.repository.UserRepository;
 import com.swapnixi.feedbackhub.exception.ResourceNotFoundException;
 import com.swapnixi.feedbackhub.service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -22,11 +25,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(UserDTO userDto, Integer userId) {
+    public UserDTO updateUser(UserDTO userDto, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
-        // Update user object with data from userDto
         if (userDto.getName() != null) {
             user.setName(userDto.getName());
         }
@@ -45,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(Integer userId) {
+    public UserDTO getUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         return userToDTO(user);
@@ -59,13 +61,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer userId) {
+    public void deleteUser(Long userId) {
         // Implementation for deleting a user by ID
         // This method should delete the user with the given ID from the repository
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
 
-    public User DtoToUser(UserDTO userDTO) {
+    private User DtoToUser(UserDTO userDTO) {
         User user = new User();
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public UserDTO userToDTO(User user) {
+    private UserDTO userToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());
