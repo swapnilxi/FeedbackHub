@@ -1,4 +1,4 @@
-com.swapnixi.feedbackhub.service.implementation;
+package com.swapnixi.feedbackhub.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
