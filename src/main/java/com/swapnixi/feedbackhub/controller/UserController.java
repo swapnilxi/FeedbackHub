@@ -1,5 +1,6 @@
 package com.swapnixi.feedbackhub.controller;
 
+import com.swapnixi.feedbackhub.entity.User;
 import com.swapnixi.feedbackhub.entity.UserDTO;
 import com.swapnixi.feedbackhub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.createUser(userDTO);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
@@ -34,9 +35,14 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
+    @GetMapping("/new")
+    public List<User> getUsersWithNameContainingNewKeyword() {
+        return userService.getUsersWithNameContainingNewKeyword();
+    }
+
     @GetMapping("/all")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> users = userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 

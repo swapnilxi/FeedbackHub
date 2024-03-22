@@ -18,10 +18,11 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = DtoToUser(userDTO);
+    public User createUser(User user) {
+//        User user = DtoToUser(user);
         User savedUser = userRepository.save(user);
-        return userToDTO(savedUser);
+//        return userToDTO(savedUser);
+        return  savedUser;
     }
 
     @Override
@@ -54,10 +55,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        // Implementation for getting all users
-        // This method should retrieve all users from the repository and convert them to UserDTOs
-        throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
+    public List<User> getAllUsers() {
+        // Implement your logic to fetch all users from the repository
+        return userRepository.findAll();
     }
 
     @Override
@@ -65,6 +65,11 @@ public class UserServiceImpl implements UserService {
         // Implementation for deleting a user by ID
         // This method should delete the user with the given ID from the repository
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+    }
+
+    @Override
+    public List<User> getUsersWithNameContainingNewKeyword() {
+        return  userRepository.nameHasNewKeyword();
     }
 
     private User DtoToUser(UserDTO userDTO) {
