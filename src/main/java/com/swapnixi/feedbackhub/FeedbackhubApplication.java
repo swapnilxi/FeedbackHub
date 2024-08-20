@@ -8,6 +8,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FeedbackhubApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FeedbackhubApplication.class, args);
-		System.out.println("this is feedback app");
 	}
 }
