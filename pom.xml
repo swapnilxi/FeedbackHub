@@ -107,6 +107,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>feedbackhub</finalName>
 	</build>
 
 </project>
