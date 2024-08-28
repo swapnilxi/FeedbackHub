@@ -6,7 +6,7 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/saksham000/FeedbackHub-Forked']])
+                checkout scmGit(branches: [[name: '*/Added-Jenkins-file']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/saksham000/FeedbackHub-Forked']])
                 bat 'mvn clean install'
             }
         }
