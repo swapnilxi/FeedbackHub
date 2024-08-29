@@ -72,16 +72,6 @@ public class UserServiceImpl implements UserService {
         return  userRepository.nameHasNewKeyword();
     }
 
-    private User DtoToUser(UserDTO userDTO) {
-        User user = new User();
-        user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setAbout(userDTO.getAbout());
-        user.setPassword(userDTO.getPassword());
-        return user;
-    }
-
     private UserDTO userToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
