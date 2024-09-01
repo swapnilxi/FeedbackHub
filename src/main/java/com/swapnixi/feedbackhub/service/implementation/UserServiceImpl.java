@@ -1,15 +1,19 @@
 package com.swapnixi.feedbackhub.service.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.swapnixi.feedbackhub.entity.UserDTO;
 import com.swapnixi.feedbackhub.entity.User;
 import com.swapnixi.feedbackhub.repository.UserRepository;
 import com.swapnixi.feedbackhub.exception.ResourceNotFoundException;
+import com.swapnixi.feedbackhub.exception.UserAlreadyRegestredException;
 import com.swapnixi.feedbackhub.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,10 +23,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-//        User user = DtoToUser(user);
-        User savedUser = userRepository.save(user);
-//        return userToDTO(savedUser);
-        return  savedUser;
+        // This will check wether the user is already regestered or not
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new UserAlreadyRegestredException("Email already registered !");
+        } else {
+            // If the user is new then it will store the user
+            User savedUser = userRepository.save(user);
+            return savedUser;
+        }
+    }
+
+    @Override
+    public boolean loginUser(String email, String password) {
+        if (userRepository.login(email, password)) {
+            return true;
+        } else {
+            return true;
+        }
     }
 
     @Override
@@ -64,12 +82,16 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         // Implementation for deleting a user by ID
         // This method should delete the user with the given ID from the repository
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        if (userRepository.findById(userId).isPresent()) {
+            userRepository.deleteById(userId);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
     public List<User> getUsersWithNameContainingNewKeyword() {
-        return  userRepository.nameHasNewKeyword();
+        return userRepository.nameHasNewKeyword();
     }
 
     private UserDTO userToDTO(User user) {
