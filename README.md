@@ -70,10 +70,10 @@ You can then use JPA (Java Persistence API) to interact with your MySQL database
 First, add the necessary dependencies to your project's pom.xml file:
 
 ```
-	<dependency>
-		<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-	</dependency>
+<dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+</dependency>
 ```
 
 Next, write these configurations in application.properties file in the src/main/resources directory and configure the database connection settings:
@@ -172,3 +172,59 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 - add dependencies
 - add databases
 - create folder structure
+
+## Setting up CI/CD Pipeline using Jenkins and Dockerizing Application
+
+- Create Two files in Root Directory Named Jenkinsfile and Dockerfile
+
+1. Here is how to configure Jenkinsfile write following code in the file
+
+```
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    stages {
+        stage('Build Maven') {
+            steps {
+                checkout scmGit(branches: [[name: '*/{Branch Name}']], extensions: [], userRemoteConfigs: [[url: ' {GitHub Project URL} ']])
+                bat 'mvn clean install'
+            }
+        }
+        stage('Build docker image') {
+            steps {
+                script {
+                    bat 'docker build -t {DockerHub Repo name}:feedbackhub-v1 .'
+                }
+            }
+        }
+        stage('Push Docker image to Hub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: '{Variabel Id}', variable: '{DockerHub Password Stored in Secrete Key use Jenkins Syntax Creator for Key}')]) {
+                    }
+                    bat 'docker push {DockerHub Repo Name}:feedbackhub-v1'
+                }
+            }
+        }
+    }
+}
+```
+2. Here is how to configure Dockerfile write following code in the file
+
+- First Write the Following Line in Pom.xml build tag. So that the jar file in target folder will be named as feedbackhub
+
+```
+<finalName>feedbackhub</finalName>
+
+```
+- Then write the following code in Dockerfile
+
+```
+FROM openjdk:17
+EXPOSE 9090
+ADD target/feedbackhub.jar feedbackhub.jar
+ENTRYPOINT [ "java","-jar","/feedbackhub.jar" ]
+
+```

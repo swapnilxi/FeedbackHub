@@ -2,11 +2,13 @@ package com.swapnixi.feedbackhub.controller;
 
 import com.swapnixi.feedbackhub.entity.User;
 import com.swapnixi.feedbackhub.entity.UserDTO;
+import com.swapnixi.feedbackhub.exception.UserAlreadyRegestredException;
 import com.swapnixi.feedbackhub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,8 +21,22 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        try {
+            User createdUser = userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        } catch (UserAlreadyRegestredException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "login/{email}/{password}")
+    public boolean userLogin(@PathVariable String email, @PathVariable String password) {
+        if (userService.loginUser(email, password)) {
+            ResponseEntity.accepted();
+            return true;
+        } else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Credentials");
+        }
     }
 
     @PutMapping("/update/{userId}")
@@ -49,6 +65,6 @@ public class UserController {
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
