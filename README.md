@@ -228,3 +228,17 @@ ADD target/feedbackhub.jar feedbackhub.jar
 ENTRYPOINT [ "java","-jar","/feedbackhub.jar" ]
 
 ```
+
+## Adding Swagger to Application
+
+- Add following dependecy in pom.xml
+
+```
+<dependency>
+	<groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	<version>2.6.0</version>
+</dependency>
+
+```
+- Now visit ``` http://localhost:9090/swagger-ui/index.html ``` to access Swagger UI
